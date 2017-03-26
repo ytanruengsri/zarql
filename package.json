@@ -1,0 +1,29 @@
+{
+  "name": "zarql",
+  "version": "0.1.0",
+  "description": "data query and aggregation",
+  "main": "index.js",
+  "author": "Yuthasak Tanruengsri",
+  "license": "MIT",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js"
+  },
+  "dependencies": {
+    "body-parser": "1.17.1",
+    "connect": "3.6.0",
+    "express": "4.15.2",
+    "express-graphql": "0.6.3",
+    "graphql": "0.9.1",
+    "graphql-server-express": "0.6.0",
+    "graphql-tools": "0.10.1",
+    "request": "2.81.0",
+    "request-promise": "4.2.0"
+  },
+  "devDependencies": {
+    "babel-eslint": "7.2.1",
+    "eslint-config-airbnb-base": "11.1.1",
+    "eslint-plugin-import": "2.2.0",
+    "nodemon": "1.11.0"
+  }
+}
