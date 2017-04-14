@@ -1,13 +1,29 @@
 const schema = `
+type ReviewSummaries {
+  averageStarRating: Int
+  numberOfUserReviews: Int
+  numberOfUserRecommendations: Int
+  numberOfUserPositiveRecommendations: Int
+}
+
+type Brand {
+  code: String
+  name: String
+  shopUrl: String
+}
+
 type Article {
-  config_sku: String
-  model_sku: String
+  configSku: String
+  modelSku: String
   name: String
   url: String
+  brand: Brand
+  summaries: ReviewSummaries
 }
 
 type Query {
-  article(config_sku: String!): Article
+  article(configSku: String!): Article
+  recommendation(configSku: String!): [Article]
 }
 
 schema {

@@ -1,4 +1,3 @@
-const http = require('http');
 const bodyParser = require('body-parser');
 const express = require('express');
 const { graphqlExpress, graphiqlExpress } = require('graphql-server-express');
@@ -20,7 +19,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use('/graphiql', graphiqlExpress({
-    endpointURL: '/graphql'
+    endpointURL: '/graphql',
 }));
 
 app.use('/graphql', graphqlExpress(graphQLOptions));

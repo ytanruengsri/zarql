@@ -1,44 +1,45 @@
-const request = require('request-promise');
+const {
+    getArticle,
+    getReviewSummaries,
+    getRecommendation,
+} = require('./services');
 
-const ARTICLE_ENDPOINT = 'https://api.zalando.com/articles';
+const {
+    toArticle,
+    toReviewSummaries,
+} = require('./converter');
 
-const getArticle =({
-    config_sku,
-}) => {
-    const options = {
-        uri: `${ARTICLE_ENDPOINT}/${config_sku}`,
-        qs: {
-            fields: 'id,modelId,name,shopUrl',
-        },
-        headers: {
-            'accept-language': 'de-DE',
-        },
-        json: true,
-    };
+const aggregateArticle = (args) => {
+    return Promise.all([
+        getArticle({ configSku: args.configSku }),
+        getReviewSummaries({ modelSku: args.modelSku }),
+    ]).then(([article, reviewSummaries]) => {
+        if (!article.id) {
+            return article;
+        }
 
-    return request(options)
-        .then((response) => {
-            if (!response.content) {
-                return response;
-            }
-
-            return response.content.find(a => a.available);
+        return Object.assign({}, toArticle(article), {
+            summaries: toReviewSummaries(reviewSummaries),
         });
-}
+    });
+};
 
+const aggregateRecommendation = (args) => {
+    return getRecommendation({ configSku: args.configSku })
+        .then((recommendation) => {
+            return recommendation.map((article) => {
+                return toArticle(article);
+            });
+        });
+};
 
 const resolvers = {
     Query: {
         article(_, args) {
-            return getArticle({ config_sku: args.config_sku })
-                .then(article => {
-                    return {
-                        config_sku: article.id,
-                        model_sku: article.modelId,
-                        name: article.name,
-                        url: article.shopUrl,
-                    };
-                });
+            return aggregateArticle(args);
+        },
+        recommendation(_, args) {
+            return aggregateRecommendation(args);
         },
     },
 };

@@ -1,0 +1,12 @@
+{
+  "extends": "airbnb-base",
+  "parser": "babel-eslint",
+  "env": {
+    "node": true
+  },
+  "rules": {
+    "indent": [2, 4, { "SwitchCase": 1 }],
+    "arrow-body-style": ["error", "always"],
+    "max-len": ["error", 120]
+  }
+}
