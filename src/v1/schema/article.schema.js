@@ -6,7 +6,6 @@ class ArticleSchema {
                 modelId: String
                 name: String
                 shopUrl: String
-                brand: Brand
             }
         `;
     }

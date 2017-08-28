@@ -5,10 +5,11 @@ const graphqlHTTP = require('express-graphql');
 // V1 - String Schema
 // =============================================================================
 const schemaV1 = require('./src/v1/schema');
-const resolversV1 = require('./src/v1/resolvers');
+const resolvers = require('./src/resolvers');
 
 // V2 - Javascript Schema
 // =============================================================================
+const schemaV2 = require('./src/v2/schema');
 
 const PORT = 4000;
 const app = express();
@@ -20,7 +21,12 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use('/graphql', graphqlHTTP({
     schema: schemaV1,
     graphiql: true,
-    rootValue: resolversV1,
+    rootValue: resolvers,
+}));
+
+app.use('/v2-graphql', graphqlHTTP({
+    schema: schemaV2,
+    graphiql: true,
 }));
 
 // START THE SERVER
