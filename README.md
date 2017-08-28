@@ -39,7 +39,7 @@ http://localhost:4000/graphql
     rating
   }
   reviewSummaries(modelId:"V1021N03I") {
-		articleModelId
+    articleModelId
     averageStarRating
     numberOfUserReviews
     numberOfUserRecommendations
