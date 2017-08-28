@@ -1,29 +1,30 @@
 const bodyParser = require('body-parser');
 const express = require('express');
-const { graphqlExpress, graphiqlExpress } = require('graphql-server-express');
-const { makeExecutableSchema } = require('graphql-tools');
-const schema = require('./api/schema');
-const resolvers = require('./api/resolvers');
+const graphqlHTTP = require('express-graphql');
+
+// V1 - String Schema
+// =============================================================================
+const schemaV1 = require('./src/v1/schema');
+const resolversV1 = require('./src/v1/resolvers');
+
+// V2 - Javascript Schema
+// =============================================================================
 
 const PORT = 4000;
 const app = express();
-const executableSchema = makeExecutableSchema({
-    typeDefs: [schema],
-    resolvers,
-});
-const graphQLOptions = {
-    schema: executableSchema,
-};
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.use('/graphiql', graphiqlExpress({
-    endpointURL: '/graphql',
+// REGISTER OUR ROUTES -------------------------------
+app.use('/graphql', graphqlHTTP({
+    schema: schemaV1,
+    graphiql: true,
+    rootValue: resolversV1,
 }));
 
-app.use('/graphql', graphqlExpress(graphQLOptions));
-
+// START THE SERVER
+// =============================================================================
 app.listen(PORT, () => {
     console.log(`Running a GraphQL API server at localhost:${PORT}/graphql`);
 });
