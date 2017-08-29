@@ -1,13 +1,13 @@
-const articleResolver = require('./article.resolver');
-const brandResolver = require('./brand.resolver');
+const resolveArticle = require('./article.resolver');
+const resolveBrand = require('./brand.resolver');
 const {
-    reviewsResolver,
-    reviewSummariesResolver,
+    resolveReviews,
+    resolveReviewSummaries,
 } = require('./reviews.resolver');
 
 module.exports = {
-    article: (...params) => articleResolver(...params),
-    brand: (...params) => brandResolver(...params),
-    reviews: (...params) => reviewsResolver(...params),
-    reviewSummaries: (...params) => reviewSummariesResolver(...params),
+    article: (...params) => resolveArticle(...params),
+    brand: (...params) => resolveBrand(...params),
+    reviews: (...params) => resolveReviews(...params),
+    reviewSummaries: (...params) => resolveReviewSummaries(...params),
 };

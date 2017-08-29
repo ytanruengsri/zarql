@@ -1,11 +1,11 @@
-const { getReviews, getReviewSummaries } = require('../../services/review.service');
+const { getReviews, getReviewSummaries } = require('../services/review.service');
 
-exports.reviewsResolver = ({ articleId }) => {
+exports.resolveReviews = ({ articleId }) => {
     return getReviews({ articleId })
         .then(reviews => reviews.content)
         .catch(() => []);
 };
 
-exports.reviewSummariesResolver = ({ modelId }) => {
+exports.resolveReviewSummaries = ({ modelId }) => {
     return getReviewSummaries({ modelId });
 };

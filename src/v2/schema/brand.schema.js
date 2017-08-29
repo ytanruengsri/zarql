@@ -6,13 +6,19 @@ const {
 const BrandType = new GraphQLObjectType({
     name: 'BrandType',
     fields: {
-        code: {
+        key: {
             type: GraphQLString,
         },
         name: {
             type: GraphQLString,
         },
         shopUrl: {
+            type: GraphQLString,
+        },
+        logoUrl: {
+            type: GraphQLString,
+        },
+        logoLargeUrl: {
             type: GraphQLString,
         },
     },
