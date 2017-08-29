@@ -18,7 +18,7 @@ and enjoy ```localhost:4000/v2-graphql```
 
 ## Try it out!
 ```
-http://localhost:4000/graphql
+http://localhost:4000/v2-graphql
 ```
 
 **Query:**
