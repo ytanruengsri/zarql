@@ -2,6 +2,8 @@ const {
     GraphQLObjectType,
     GraphQLString,
 } = require('graphql/type');
+
+// Custom Types
 const UrlType = require('../types/url.type');
 
 const BrandFamilyType = new GraphQLObjectType({

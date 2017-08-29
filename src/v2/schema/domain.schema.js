@@ -4,6 +4,7 @@ const {
     GraphQLFloat,
 } = require('graphql/type');
 
+// Custom Types
 const UrlType = require('../types/url.type');
 
 const DomainType = new GraphQLObjectType({

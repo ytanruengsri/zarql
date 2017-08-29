@@ -7,9 +7,10 @@ const {
     GraphQLBoolean,
 } = require('graphql/type');
 
+// Custom Types
 const UrlType = require('../types/url.type');
 
-// Schema
+// Types
 const BrandType = require('./brand.schema');
 
 // Resolvers
