@@ -1,11 +1,17 @@
 const {
+    GraphQLUnionType,
     GraphQLObjectType,
     GraphQLEnumType,
+    GraphQLNonNull,
+    GraphQLID,
     GraphQLString,
     GraphQLInt,
     GraphQLList,
     GraphQLBoolean,
 } = require('graphql/type');
+
+// Interface
+const ArticleInterface = require('../interfaces/article.interface');
 
 // Custom Types
 const UrlType = require('../types/url.type');
@@ -160,69 +166,98 @@ const ArticleAttributeType = new GraphQLObjectType({
     },
 });
 
-const ArticleType = new GraphQLObjectType({
-    name: 'ArticleType',
-    fields: {
-        id: {
-            type: GraphQLString,
-        },
-        modelId: {
-            type: GraphQLString,
-        },
-        name: {
-            type: GraphQLString,
-        },
-        shopUrl: {
-            type: UrlType,
-        },
-        color: {
-            type: GraphQLString,
-        },
-        available: {
-            type: GraphQLBoolean,
-        },
-        season: {
-            type: GraphQLString,
-        },
-        seasonYear: {
-            type: GraphQLString,
-        },
-        activationDate: {
-            type: GraphQLString,
-        },
-        genders: {
-            type: new GraphQLList(GenderEnumType),
-        },
-        ageGroups: {
-            type: new GraphQLList(AgeGroupEnumType),
-        },
-        brand: {
-            type: BrandType,
-        },
-        categoryKeys: {
-            type: new GraphQLList(GraphQLString),
-        },
-        attributes: {
-            type: new GraphQLList(ArticleAttributeType),
-        },
-        additionalInfos: {
-            type: new GraphQLList(GraphQLString),
-        },
-        units: {
-            type: new GraphQLList(ArticleUnitType),
-        },
-        media: {
-            type: ArticleMediaType,
-            args: {
-                types: {
-                    type: new GraphQLList(GraphQLString),
-                },
+const ArticleTypeFields = {
+    id: {
+        type: new GraphQLNonNull(GraphQLID),
+    },
+    modelId: {
+        type: new GraphQLNonNull(GraphQLString),
+    },
+    name: {
+        type: GraphQLString,
+    },
+    shopUrl: {
+        type: UrlType,
+    },
+    color: {
+        type: GraphQLString,
+    },
+    available: {
+        type: GraphQLBoolean,
+    },
+    season: {
+        type: GraphQLString,
+    },
+    seasonYear: {
+        type: GraphQLString,
+    },
+    activationDate: {
+        type: GraphQLString,
+    },
+    genders: {
+        type: new GraphQLList(GenderEnumType),
+    },
+    ageGroups: {
+        type: new GraphQLList(AgeGroupEnumType),
+    },
+    brand: {
+        type: BrandType,
+    },
+    categoryKeys: {
+        type: new GraphQLList(GraphQLString),
+    },
+    attributes: {
+        type: new GraphQLList(ArticleAttributeType),
+    },
+    additionalInfos: {
+        type: new GraphQLList(GraphQLString),
+    },
+    units: {
+        type: new GraphQLList(ArticleUnitType),
+    },
+    media: {
+        type: ArticleMediaType,
+        args: {
+            types: {
+                type: new GraphQLList(GraphQLString),
             },
-            resolve: (_, args) => {
-                return resolveArticleImages(_, args);
-            },
+        },
+        resolve: (_, args) => {
+            return resolveArticleImages(_, args);
         },
     },
+};
+
+const InStockArticleType = new GraphQLObjectType({
+    name: 'InStockArticleType',
+    interfaces: [ArticleInterface],
+    fields: ArticleTypeFields,
+    isTypeOf: (value) => {
+        return value.available;
+    },
 });
+
+const OutOfStockArticleType = new GraphQLObjectType({
+    name: 'OutOfStockArticleType',
+    interfaces: [ArticleInterface],
+    fields: ArticleTypeFields,
+    isTypeOf: (value) => {
+        return !value.available;
+    },
+});
+
+const ArticleType = new GraphQLUnionType({
+    name: 'ArticleType',
+    types: [InStockArticleType, OutOfStockArticleType],
+    resolveType: (data) => {
+        if (data.available) {
+            return InStockArticleType;
+        }
+        return OutOfStockArticleType;
+    },
+});
+
+exports.InStockArticleType = InStockArticleType;
+exports.OutOfStockArticleType = OutOfStockArticleType;
 
 module.exports = ArticleType;

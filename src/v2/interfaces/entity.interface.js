@@ -4,8 +4,8 @@ const {
     GraphQLID,
 } = require('graphql/type');
 
-const EntityType = new GraphQLInterfaceType({
-    name: 'Entity',
+const EntityInterfaceType = new GraphQLInterfaceType({
+    name: 'EntityInterfaceType',
     fields: {
         id: {
             type: new GraphQLNonNull(GraphQLID),
@@ -13,4 +13,4 @@ const EntityType = new GraphQLInterfaceType({
     },
 });
 
-module.export = EntityType;
+module.export = EntityInterfaceType;
