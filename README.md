@@ -86,7 +86,6 @@ fragment BrandFragment on BrandType {
 
 **Response:**
 ```json
-{
   {
     "data": {
       "article": {
