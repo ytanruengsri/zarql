@@ -29,9 +29,23 @@ query {
     modelId
     name
     shopUrl
+    genders
+    ageGroups
+    media(types:["MODEL","NON_MODEL"])  {
+      images {
+        orderNumber
+        type
+        largeHdUrl
+      }
+    }
+    brand {
+      name
+      shopUrl
+    }
   }
   brand(brandId:"V10") {
     name
+    shopUrl
   }
   reviews(articleId:"V1021N03I-Q11") {
     title
@@ -39,7 +53,7 @@ query {
     rating
   }
   reviewSummaries(modelId:"V1021N03I") {
-		articleModelId
+    articleModelId
     averageStarRating
     numberOfUserReviews
     numberOfUserRecommendations
@@ -50,6 +64,10 @@ query {
       LEG_FIT
       SHOULDERS
     }
+  }
+  domains(countryCode:"DE") {
+    languageCode
+    countryCode
   }
 }
 ```
@@ -62,10 +80,45 @@ query {
       "id": "V1021N03I-Q11",
       "modelId": "V1021N03I",
       "name": "VICOMMIT ZIP COATED - Jeans Skinny Fit - black",
-      "shopUrl": "https://www.zalando.de/vila-vicommit-zip-coated-jeans-skinny-fit-black-v1021n03i-q11.html"
+      "shopUrl": "https://www.zalando.de/vila-vicommit-zip-coated-jeans-skinny-fit-black-v1021n03i-q11.html",
+      "genders": [
+        "FEMALE"
+      ],
+      "ageGroups": [
+        "ADULT"
+      ],
+      "media": {
+        "images": [
+          {
+            "orderNumber": 1,
+            "type": "NON_MODEL",
+            "largeHdUrl": "https://i4.ztat.net/large_hd/V1/02/1N/03/IQ/11/V1021N03I-Q11@14.jpg"
+          },
+          {
+            "orderNumber": 3,
+            "type": "MODEL",
+            "largeHdUrl": "https://i2.ztat.net/large_hd/V1/02/1N/03/IQ/11/V1021N03I-Q11@12.jpg"
+          },
+          {
+            "orderNumber": 4,
+            "type": "MODEL",
+            "largeHdUrl": "https://i3.ztat.net/large_hd/V1/02/1N/03/IQ/11/V1021N03I-Q11@11.jpg"
+          },
+          {
+            "orderNumber": 5,
+            "type": "MODEL",
+            "largeHdUrl": "https://i5.ztat.net/large_hd/V1/02/1N/03/IQ/11/V1021N03I-Q11@15.jpg"
+          }
+        ]
+      },
+      "brand": {
+        "name": "Vila",
+        "shopUrl": "https://www.zalando.de/vila"
+      }
     },
     "brand": {
-      "name": "Vila"
+      "name": "Vila",
+      "shopUrl": "https://www.zalando.co.uk/vila"
     },
     "reviews": [
       {
@@ -121,7 +174,13 @@ query {
         "LEG_FIT": 3,
         "SHOULDERS": null
       }
-    }
+    },
+    "domains": [
+      {
+        "languageCode": "de",
+        "countryCode": "DE"
+      }
+    ]
   }
 }
 ```
