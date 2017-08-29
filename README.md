@@ -185,11 +185,19 @@ query {
 }
 ```
 
-### Query article
-![alt tag](https://raw.githubusercontent.com/ytanruengsri/zarql/master/docs/images/article_query.png)
+## How to define nested schema in javascript?
+**Documentation:**
+See http://graphql.org/learn/schema/#type-system
 
-### Query recommendation
-![alt tag](https://raw.githubusercontent.com/ytanruengsri/zarql/master/docs/images/recommendation_query.png)
+**Example:**
+See https://github.com/ytanruengsri/zarql/blob/master/src/v2/schema/article.schema.js
+
+## How to create a custom type using `GraphQLScalarType`?
+**Documentation:**
+See http://graphql.org/graphql-js/type/#graphqlscalartype
+
+**Example:**
+See https://github.com/ytanruengsri/zarql/blob/master/src/v2/types/url.type.js
 
 ## More Information
 * [GraphQL Spec](https://facebook.github.io/graphql/)
