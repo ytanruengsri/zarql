@@ -196,6 +196,41 @@ See https://github.com/ytanruengsri/zarql/blob/master/src/v2/schema/article.sche
 **Documentation:**
 See http://graphql.org/graphql-js/type/#graphqlscalartype
 
+## How to request multiple entities in a single query?
+```
+  query {
+    ...
+    adidasBrand: brand(brandId:"AD1") {
+      name
+      shopUrl
+    }
+    nikeBrand: brand(brandId:"NI1") {
+      name
+      shopUrl
+    }
+    ...
+  }
+```
+
+## How to extract out common fields into a `fragment`?
+```
+adidasBrand: brand(brandId:"AD1") {
+  ...BrandFragment
+}
+nikeBrand: brand(brandId:"NI1") {
+  ...BrandFragment
+}
+
+fragment BrandFragment on BrandType {
+  name
+  shopUrl
+}
+```
+
+## Questions
+* How to request dynamic key?
+See https://github.com/ytanruengsri/zarql/blob/master/src/v2/schema/reviews.schema.js#L12
+
 **Example:**
 See https://github.com/ytanruengsri/zarql/blob/master/src/v2/types/url.type.js
 
