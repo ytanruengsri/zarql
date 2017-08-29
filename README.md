@@ -258,7 +258,7 @@ fragment BrandFragment on BrandType {
 ```
 
 ## Questions
-* How to request dynamic key?
+**How to request dynamic key?**
 See https://github.com/ytanruengsri/zarql/blob/master/src/v2/schema/reviews.schema.js#L12
 
 **Example:**
