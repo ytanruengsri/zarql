@@ -2,6 +2,7 @@ const {
     GraphQLObjectType,
     GraphQLString,
 } = require('graphql/type');
+const UrlType = require('../types/url.type');
 
 const BrandFamilyType = new GraphQLObjectType({
     name: 'BrandFamilyType',
@@ -13,7 +14,7 @@ const BrandFamilyType = new GraphQLObjectType({
             type: GraphQLString,
         },
         shopUrl: {
-            type: GraphQLString,
+            type: UrlType,
         },
     },
 });
@@ -28,13 +29,13 @@ const BrandType = new GraphQLObjectType({
             type: GraphQLString,
         },
         shopUrl: {
-            type: GraphQLString,
+            type: UrlType,
         },
         logoUrl: {
-            type: GraphQLString,
+            type: UrlType,
         },
         logoLargeUrl: {
-            type: GraphQLString,
+            type: UrlType,
         },
         brandFamily: {
             type: BrandFamilyType,

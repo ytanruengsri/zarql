@@ -1,5 +1,4 @@
 const {
-    // GraphQLScalarType,
     GraphQLObjectType,
     GraphQLEnumType,
     GraphQLString,
@@ -8,6 +7,7 @@ const {
     GraphQLBoolean,
 } = require('graphql/type');
 
+const UrlType = require('../types/url.type');
 const BrandType = require('./brand.schema');
 
 const AgeGroupEnumType = new GraphQLEnumType({
@@ -167,7 +167,7 @@ const ArticleType = new GraphQLObjectType({
             type: GraphQLString,
         },
         shopUrl: {
-            type: GraphQLString,
+            type: UrlType,
         },
         color: {
             type: GraphQLString,
