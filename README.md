@@ -14,7 +14,7 @@ Just run
 $ npm run dev
 ```
 
-and enjoy ```localhost:4000/graphql```
+and enjoy ```localhost:4000/v2-graphql```
 
 ## Try it out!
 ```
@@ -23,7 +23,7 @@ http://localhost:4000/graphql
 
 **Query:**
 ```
-{
+query {
   article(articleId:"V1021N03I-Q11") {
     id
     modelId
@@ -39,11 +39,17 @@ http://localhost:4000/graphql
     rating
   }
   reviewSummaries(modelId:"V1021N03I") {
-    articleModelId
+		articleModelId
     averageStarRating
     numberOfUserReviews
     numberOfUserRecommendations
     numberOfUserPositiveRecommendations
+    articleSizeRatings {
+      OVERALL
+      LENGTH
+      LEG_FIT
+      SHOULDERS
+    }
   }
 }
 ```
@@ -108,7 +114,13 @@ http://localhost:4000/graphql
       "averageStarRating": 4.1,
       "numberOfUserReviews": 9,
       "numberOfUserRecommendations": 9,
-      "numberOfUserPositiveRecommendations": 0
+      "numberOfUserPositiveRecommendations": 0,
+      "articleSizeRatings": {
+        "OVERALL": 3,
+        "LENGTH": 3,
+        "LEG_FIT": 3,
+        "SHOULDERS": null
+      }
     }
   }
 }
