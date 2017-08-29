@@ -8,7 +8,12 @@ const {
 } = require('graphql/type');
 
 const UrlType = require('../types/url.type');
+
+// Schema
 const BrandType = require('./brand.schema');
+
+// Resolvers
+const resolveArticleImages = require('../../resolvers/article-images.resolver');
 
 const AgeGroupEnumType = new GraphQLEnumType({
     name: 'AgeGroupEnumType',
@@ -207,6 +212,14 @@ const ArticleType = new GraphQLObjectType({
         },
         media: {
             type: ArticleMediaType,
+            args: {
+                types: {
+                    type: new GraphQLList(GraphQLString),
+                },
+            },
+            resolve: (_, args) => {
+                return resolveArticleImages(_, args);
+            },
         },
     },
 });
