@@ -25,7 +25,7 @@ http://localhost:4000/v2-graphql
 ```
 query {
   article(articleId:"V1021N03I-Q11") {
-		... on InStockArticleType {
+    ... on InStockArticleType {
       id
       modelId
       name
