@@ -131,3 +131,8 @@ query {
 
 ### Query recommendation
 ![alt tag](https://raw.githubusercontent.com/ytanruengsri/zarql/master/docs/images/recommendation_query.png)
+
+## More Information
+* [GraphQL Spec](https://facebook.github.io/graphql/)
+* [Github GraphQL API](https://developer.github.com/v4/)
+* [Zalando Public API](https://github.com/zalando/shop-api-documentation/wiki)

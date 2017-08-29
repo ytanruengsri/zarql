@@ -5,11 +5,13 @@ const {
     GraphQLNonNull,
     GraphQLList,
 } = require('graphql/type');
+const DomainType = require('./domain.schema');
 const ArticleType = require('./article.schema');
 const BrandType = require('./brand.schema');
 const { ReviewsType, ReviewSummariesType } = require('./reviews.schema');
 const resolveArticle = require('../../resolvers/article.resolver');
 const resolveBrand = require('../../resolvers/brand.resolver');
+const resolveDomains = require('../../resolvers/domain.resolver');
 const { resolveReviews, resolveReviewSummaries } = require('../../resolvers/reviews.resolver');
 
 const QueryType = new GraphQLObjectType({
@@ -57,6 +59,17 @@ const QueryType = new GraphQLObjectType({
             },
             resolve(_, args) {
                 return resolveReviewSummaries(args);
+            },
+        },
+        domains: {
+            type: new GraphQLList(DomainType),
+            args: {
+                countryCode: {
+                    type: GraphQLString,
+                },
+            },
+            resolve(_, args) {
+                return resolveDomains(args);
             },
         },
     },
